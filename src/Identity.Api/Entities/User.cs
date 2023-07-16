@@ -9,6 +9,6 @@ public class User
     public string? Lastname { get; set; }
     public required string Username { get; set; }
     public string PasswordHash { get; set; }
-    public DateTime CreateDate { get; set; }
+    public DateTime CreateDate { get; set; } = DateTime.UtcNow;
     public ERole UserRole { get; set; }
 }

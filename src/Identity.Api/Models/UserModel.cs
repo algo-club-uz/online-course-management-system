@@ -1,17 +1,24 @@
 ﻿using Identity.Api.Entities;
+using Identity.Api.Entities.Enums;
 
 namespace Identity.Api.Models;
 
 public class UserModel
 {
-    public Guid Id { get; set; }
-    public string? Name { get; set; }
-    public string UserName { get; set; }
+    public Guid UserId { get; set; }
+    public  string Firstname { get; set; }
+    public string? Lastname { get; set; }
+    public  string Username { get; set; }
+    public DateTime CreateDate { get; set; }
+    public ERole UserRole { get; set; }
 
     public UserModel(User user)
     {
-        Id = user.UserId;
-        Name = user.Firstname;
-        UserName = user.Username;
+        UserId = user.UserId;
+        Firstname = user.Firstname;
+        Lastname = user.Lastname;
+        Username = user.Username;
+        CreateDate = user.CreateDate;
+        UserRole = user.UserRole;
     }
 }
