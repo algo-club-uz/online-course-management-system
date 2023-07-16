@@ -1,0 +1,62 @@
+public class users
+{
+   public Guid UserId{get;set;}
+   public string Firstname {get;set;}
+   public string Lastname {get;set;}
+   public string Username {get;set;}
+   public string Password {get;set;}
+   public string ConfirmPassword {get;set;}
+   public Datetime CreateDate {get;set;}
+   public ERole UserRole {get;set;}
+}
+
+public enum ERole
+{
+  User,
+  Admin,
+  SuperAdmin
+} 
+
+//Course bir nechta content bo'lishi mumkun, contentda bitta coursega tegishli(one to many)
+public class Course
+{
+   public Guid CourseId {get;set;}
+   public string Title {get;set;}
+   public string Description {get;set;}
+   public string Price {get;set;}
+   public ECourseStatus CourseStatus {get;set;}
+
+   public virtual List<Content> Contents {get;set;}
+
+}
+
+public enum ECourseStatus
+{
+  InActive,
+  Active,
+  Deleted
+}
+
+
+//Content bir nechta Data bo'lishi mumkun, Datada bitta Content tegishli(one to many)
+public class Content
+{
+  public Guid ContentId {get;set;}
+  public string ContentName {get;set;}
+  public string Description {get;set;}
+
+  public virtual List<Data> Data {get;set;}
+
+  public Guid CourseId {get;set;}
+  public virtual Course Course {get;set;}
+}
+
+public class Data
+{
+  public Guid DataId {get;set;}
+  public required string DataName {get;set}
+  public required FileUrl {get;set;}
+
+  public Guid ContentId {get;set;}
+  public virtual Content Content {get;set;}
+}
