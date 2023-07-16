@@ -6,5 +6,10 @@
 /src/Identity.Api/bin/Debug/net7.0
 /src/Identity.Api/obj
 /.vs/online-course-management-system/DesignTimeBuild
+<<<<<<< HEAD
 /src/Course.Api/obj
 /.vs/online-course-management-system/v17
+=======
+/Course.Api/obj
+/src/Course.Api/obj
+>>>>>>> b630ab136666f3a9dd7da447b60b6a516068a5c1
