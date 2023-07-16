@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HJ5YCBhwVXOUr/ABS2MMHUlWIFRvdx7ffFPK/zoHN0Nxf+S8QQESROBAP/FOSAXr/G1IKGLhdj3Gko3JETzkjw==",
+  "dgSpecHash": "NZBV23B0tmLkDXGYGVhpjCrH2rDn1nrh7fJsr6YpbCAx/692OfXCGCBWR2Id86/csT8pg9AqgaRe/hXEV0ywMw==",
   "success": true,
   "projectFilePath": "D:\\.Net projects\\Organization Projects\\Online Course Management System\\src\\Identity.Api\\Identity.Api.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,7 @@
     "C:\\Users\\fuga_02\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.15.1\\microsoft.identitymodel.protocols.openidconnect.6.15.1.nupkg.sha512",
     "C:\\Users\\fuga_02\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.15.1\\microsoft.identitymodel.tokens.6.15.1.nupkg.sha512",
     "C:\\Users\\fuga_02\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\fuga_02\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.18.1\\microsoft.visualstudio.azure.containers.tools.targets.1.18.1.nupkg.sha512",
     "C:\\Users\\fuga_02\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\fuga_02\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
     "C:\\Users\\fuga_02\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.4\\npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
