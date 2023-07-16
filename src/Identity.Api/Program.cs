@@ -46,12 +46,10 @@ builder.Services.AddDbContext<IdentityDbContext>(options =>
 builder.Services.AddIdentity(builder.Configuration);
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 app.UseHttpsRedirection();
 
