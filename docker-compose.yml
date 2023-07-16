@@ -3,21 +3,21 @@
     image: identity
     container_name: identity
     depends_on:
-        - identity_db
+        - identity_db1
     build:
         context: .
         dockerfile: Dockerfile.Identity
     ports:
         - '2023:80'
-  identity_db:
+  identity_db1:
     image: postgres:latest
-    container_name: identity_db
+    container_name: identity_db1
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5433:5432"
     restart: always
     volumes:
-      - identity_db_data:/var/lib/postgresql/data/
+      - identity_db1_data:/var/lib/postgresql/data/
 volumes: 
-  identity_db_data:
+  identity_db1_data:
