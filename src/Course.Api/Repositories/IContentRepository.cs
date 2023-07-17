@@ -48,10 +48,10 @@ public class ContentRepository : IContentRepository
         {
             var content = course.Contents.FirstOrDefault(c => c.ContentId == contentId);
             if (content != null) return content;
-            throw new Exception("Content Not Found");
+            throw new System.Exception("Content Not Found");
         }
 
-        throw new Exception("Course Contents Null");
+        throw new System.Exception("Course Contents Null");
     }
 
     public async Task UpdateContent(Content content)
