@@ -8,29 +8,29 @@ namespace Course.Api.Controllers;
 public class DatasController : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetDatas()
+    public async Task<IActionResult> GetDatas(Guid courseId, Guid contentId)
     {
         return Ok();
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddData(CreateDataModel model)
+    public async Task<IActionResult> AddData(Guid courseId, Guid contentId, CreateDataModel model)
     {
         return Ok();
     }
 
     [HttpGet("{dataId}")]
-    public async Task<IActionResult> GetDataById(Guid dataId)
+    public async Task<IActionResult> GetDataById(Guid courseId, Guid contentId,Guid dataId)
     {
         return Ok();
     }
     [HttpDelete("{dataId}")]
-    public async Task<IActionResult> DeleteById(Guid dataId)
+    public async Task<IActionResult> DeleteById(Guid courseId, Guid contentId,Guid dataId)
     {
         return Ok();
     } 
     [HttpPut("{dataId}")]
-    public async Task<IActionResult> UpdateById(Guid dataId)
+    public async Task<IActionResult> UpdateById(Guid courseId, Guid contentId,Guid dataId)
     {
         return Ok();
     }
