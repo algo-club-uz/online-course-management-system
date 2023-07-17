@@ -1,4 +1,5 @@
-﻿using Course.Api.Entities.Enums;
+﻿using Course.Api.Entities;
+using Course.Api.Entities.Enums;
 using Course.Api.Models.CourseModels;
 
 namespace Course.Api.Models;
