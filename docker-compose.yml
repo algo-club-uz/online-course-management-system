@@ -28,7 +28,7 @@
         context: .
         dockerfile: Dockerfile.Course
     ports:
-        - '2023:80'
+        - '2024:80'
   course_db:
     image: postgres:latest
     container_name: course_db
