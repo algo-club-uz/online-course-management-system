@@ -48,7 +48,6 @@ public class UserRepository : IUserRepository
 
         return user;
     }
-
     public async Task<bool> IsUserNameExist(string userName)
     {
         var isExists = await _identityDbContext.Users.
