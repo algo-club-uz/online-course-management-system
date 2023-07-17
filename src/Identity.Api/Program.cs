@@ -1,5 +1,6 @@
 using Identity.Api.Context;
 using Identity.Api.Extensions;
+using Identity.Api.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -42,7 +43,7 @@ builder.Services.AddDbContext<IdentityDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("IdentityDb"));
 });
-
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddIdentity(builder.Configuration);
 var app = builder.Build();
 
