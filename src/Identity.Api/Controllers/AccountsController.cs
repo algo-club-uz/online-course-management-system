@@ -31,7 +31,6 @@ public class AccountsController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-
         try
         {
             var user = await _userManager.Register(model);
@@ -41,7 +40,6 @@ public class AccountsController : ControllerBase
         {
             return BadRequest("UserName is already exists");
         }
-
     }
 
     [HttpPost("login")]
