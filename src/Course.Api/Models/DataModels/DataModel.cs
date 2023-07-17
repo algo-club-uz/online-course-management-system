@@ -9,6 +9,7 @@ public class DataModel
     public required string DataName { get; set; }
     public string? Description { get; set; }
     public required string FileUrl { get; set; }
+    public DateTime CreateTime { get; set; }
 
     public Guid ContentId { get; set; }
     public  ContentModel? Content { get; set; }

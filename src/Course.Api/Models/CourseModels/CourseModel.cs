@@ -11,6 +11,7 @@ public class CourseModel
     public string? Description { get; set; }
     public required string Price { get; set; }
     public ECourseStatus CourseStatus { get; set; }
+    public DateTime CreateTime { get; set; }
 
     public  required List<ContentModel> Contents { get; set; }
 

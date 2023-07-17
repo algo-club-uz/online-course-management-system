@@ -10,6 +10,8 @@ public class Course
     public required string Price { get; set; }
     public  ECourseStatus CourseStatus { get; set; }
 
+    public DateTime CreateTime { get; set; } = DateTime.UtcNow;
+
     public virtual  List<Content>? Contents { get; set; }
 
     public virtual List<UserCourse>? UserCourses { get; set; }
