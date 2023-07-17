@@ -1,7 +1,9 @@
 ﻿using Identity.Api.Context;
 using Identity.Api.Entities;
 using Identity.Api.Entities.Enums;
+using Identity.Api.Exceptions;
 using Identity.Api.Models;
+using Identity.Api.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,25 +11,22 @@ namespace Identity.Api.Managers;
 
 public class UserManager
 {
-    private readonly IdentityDbContext _context;
-    private ILogger<UserManager> _logger;
+    private readonly IUserRepository _userRepository;
     private readonly JwtTokenManager _jwtTokenManager;
 
-    public UserManager(IdentityDbContext context, ILogger<UserManager> logger, JwtTokenManager jwtTokenManager)
+    public UserManager(JwtTokenManager jwtTokenManager, IUserRepository userRepository)
     {
-        _context = context;
-        _logger = logger;
         _jwtTokenManager = jwtTokenManager;
+        _userRepository = userRepository;
     }
 
 
-    public async Task<User> Register(CreateUserModel model)
+    public async Task<UserModel> Register(CreateUserModel model)
     {
-        if (await _context.Users.AnyAsync(u => u.Username == model.Username))
+        if (await _userRepository.IsUserNameExist(model.Username))
         {
-            throw new Exception("Username already exists");
+            throw new UsernameExistException(model.Username);
         }
-
         var user = new User()
         {
             Firstname = model.Firstname,
@@ -36,40 +35,47 @@ public class UserManager
             UserRole = ERole.User
         };
 
-        user.PasswordHash = new PasswordHasher<User>().HashPassword(user, model.Password);
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
-
-        return user;
+        user.PasswordHash = new PasswordHasher<User>().HashPassword(user,model.Password);
+        await _userRepository.AddUser(user);
+        return ParseToUserModel(user);
     }
 
     public async Task<string> Login(LoginUserModel model)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == model.Username);
-        if (user == null)
-        {
-            throw new Exception("Username or Password is incorrect");
-        }
-
-        var result = new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, model.Password);
+        var userName = await _userRepository.GetUserByUserName(model.Username);
+        var result = new PasswordHasher<User>().
+            VerifyHashedPassword(userName, userName.PasswordHash, model.Password);
 
         if (result == PasswordVerificationResult.Failed)
         {
-            throw new Exception("Username or Password is incorrect");
+            throw new InCorrectPassword(model.Password);
         }
-
-        var token = _jwtTokenManager.GenerateToken(user);
-
+        var token = _jwtTokenManager.GenerateToken(userName);
         return token;
     }
 
-    public async Task<User?> GetUser(string username)
+    public async Task<UserModel?> GetUser(string username)
     {
-        return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+        var user= await _userRepository.GetUserByUserName(username);
+        return ParseToUserModel(user);
     }
-    public async Task<User?> GetUser(Guid id)
+    public async Task<UserModel?> GetUser(Guid id)
     {
-        return await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
+        var user= await _userRepository.GetUserById(id);
+        return ParseToUserModel(user);
     }
 
+    private UserModel ParseToUserModel(User user)
+    {
+        var model = new UserModel()
+        {
+            UserId = user.UserId,
+            Firstname = user.Firstname,
+            Lastname = user.Lastname,
+            CreateDate = user.CreateDate,
+            Username = user.Username,
+            UserRole = user.UserRole
+        };
+        return model;
+    }
 }
