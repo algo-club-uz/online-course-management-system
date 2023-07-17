@@ -12,13 +12,5 @@ public class UserModel
     public DateTime CreateDate { get; set; }
     public ERole UserRole { get; set; }
 
-    public UserModel(User user)
-    {
-        UserId = user.UserId;
-        Firstname = user.Firstname;
-        Lastname = user.Lastname;
-        Username = user.Username;
-        CreateDate = user.CreateDate;
-        UserRole = user.UserRole;
-    }
+
 }
