@@ -9,6 +9,7 @@ public class ContentModel
     public Guid ContentId { get; set; }
     public required string ContentName { get; set; }
     public string? Description { get; set; }
+    public DateTime CreateTime { get; set; } 
 
     public Guid CourseId { get; set; }
     public  CourseModel? Course { get; set; }
