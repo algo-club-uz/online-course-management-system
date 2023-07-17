@@ -1,4 +1,5 @@
 ﻿using Course.Api.Context;
+using Course.Api.Exception;
 using Microsoft.EntityFrameworkCore;
 
 namespace Course.Api.Repositories;
@@ -41,7 +42,10 @@ public class CourseRepository: ICourseRepository
     public async Task<Entities.Course> GetCourseById(Guid courseId)
     {
         var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == courseId);
-        if (course == null) throw new Exception("Course Not Found");
+        if (course == null)
+        {
+            throw new CourseNotFoundException(courseId.ToString());
+        }
         return course;
     }
 
