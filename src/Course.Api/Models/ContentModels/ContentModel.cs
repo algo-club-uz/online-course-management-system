@@ -12,7 +12,6 @@ public class ContentModel
     public DateTime CreateTime { get; set; } 
 
     public Guid CourseId { get; set; }
-    public  CourseModel? Course { get; set; }
 
     public  List<DataModel>? Data { get; set; }
 }

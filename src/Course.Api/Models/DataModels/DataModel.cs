@@ -12,5 +12,4 @@ public class DataModel
     public DateTime CreateTime { get; set; }
 
     public Guid ContentId { get; set; }
-    public  ContentModel? Content { get; set; }
 }
