@@ -85,6 +85,13 @@ End points
   PUT    courses/{course_id}
   DELETE courses/{course_id}
 
+
+  GET    users/{user_id}/courses/{course_id}/user_courses
+  POST   users/{user_id}/courses/{course_id}/user_courses
+  GET    users/{user_id}/courses/{course_id}/user_courses/{user_course_id}
+  PUT    users/{user_id}/courses/{course_id}/user_courses/{user_course_id}
+  DELETE users/{user_id}/courses/{course_id}/user_courses/{user_course_id}
+
   GET    courses/{course_id}/contents
   POST   courses/{course_id}/contents
   GET    courses/{course_id}/contents/{content_id}

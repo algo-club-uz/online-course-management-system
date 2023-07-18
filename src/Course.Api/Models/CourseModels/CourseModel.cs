@@ -1,6 +1,7 @@
 ﻿using Course.Api.Entities.Enums;
 using Course.Api.Entities;
 using Course.Api.Models.ContentModels;
+using Course.Api.Models.UserCourseModels;
 
 namespace Course.Api.Models.CourseModels;
 

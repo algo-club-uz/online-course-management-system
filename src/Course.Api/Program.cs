@@ -18,10 +18,14 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();
 builder.Services.AddScoped<IDataRepository, DataRepository>();
+builder.Services.AddScoped<IUserCourseRepository, UserCourseRepository>();
 
 //Managers
 builder.Services.AddScoped<ParseService>();
+builder.Services.AddScoped<CourseManager>();
 builder.Services.AddScoped<ContentManager>();
+builder.Services.AddScoped<DataManager>();
+builder.Services.AddScoped<UserCourseManager>();
 
 builder.Services.AddDbContext<CourseDbContext>(options =>
 {
