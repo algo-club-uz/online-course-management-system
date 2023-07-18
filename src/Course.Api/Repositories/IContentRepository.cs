@@ -48,6 +48,7 @@ public class ContentRepository : IContentRepository
         if (course.Contents != null)
         {
             var content = course.Contents.FirstOrDefault(c => c.ContentId == contentId);
+<<<<<<< HEAD
             if (content != null)
             {
                 return content;
@@ -61,6 +62,13 @@ public class ContentRepository : IContentRepository
         {
             throw new ContentNullException("Content is null");
         }
+=======
+            if (content != null) return content;
+            throw new System.Exception("Content Not Found");
+        }
+
+        throw new System.Exception("Course Contents Null");
+>>>>>>> master
     }
 
     public async Task UpdateContent(Content content)

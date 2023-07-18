@@ -13,7 +13,7 @@ public class CourseModel
     public ECourseStatus CourseStatus { get; set; }
     public DateTime CreateTime { get; set; }
 
-    public  required List<ContentModel> Contents { get; set; }
+    public  required List<ContentModel>? Contents { get; set; }
 
-    public  List<UserCourse>? UserCourses { get; set; }
+    public  List<UserCourseModel>? UserCourses { get; set; }
 }
