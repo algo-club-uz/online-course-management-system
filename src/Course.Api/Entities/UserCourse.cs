@@ -1,9 +1,11 @@
-﻿using Course.Api.Entities.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using Course.Api.Entities.Enums;
 
 namespace Course.Api.Entities;
 
 public class UserCourse
 {
+    [Key]
     public Guid Id { get; set; }
     public EUserCourse EUserCourseStatus { get; set; }
 
