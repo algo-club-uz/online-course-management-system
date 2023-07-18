@@ -1,5 +1,6 @@
 ﻿using Course.Api.Context;
 using Course.Api.Entities;
+using Course.Api.Exception;
 
 namespace Course.Api.Repositories;
 
@@ -47,11 +48,27 @@ public class ContentRepository : IContentRepository
         if (course.Contents != null)
         {
             var content = course.Contents.FirstOrDefault(c => c.ContentId == contentId);
+<<<<<<< HEAD
+            if (content != null)
+            {
+                return content;
+            }
+            else
+            {
+                throw new ContentNotFoundException(contentId.ToString());
+            }
+        }
+        else
+        {
+            throw new ContentNullException("Content is null");
+        }
+=======
             if (content != null) return content;
             throw new System.Exception("Content Not Found");
         }
 
         throw new System.Exception("Course Contents Null");
+>>>>>>> master
     }
 
     public async Task UpdateContent(Content content)
