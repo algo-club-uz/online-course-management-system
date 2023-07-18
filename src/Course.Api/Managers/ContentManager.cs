@@ -22,13 +22,13 @@ public class ContentManager
         return _parseService.ParseListModel(contents);
     }
 
-    public async Task<ContentModel> AddContent(CreateContentModel model)
+    public async Task<ContentModel> AddContent(Guid courseId,CreateContentModel model)
     {
         var content = new Content()
         {
             ContentName = model.ContentName,
             Description = model.Description,
-            CourseId = model.CourseId,
+            CourseId = courseId,
 
         };
 
@@ -47,7 +47,6 @@ public class ContentManager
         var content = await _contentRepository.GetContentById(courseId, contentId);
         content.ContentName = model.ContentName;
         content.Description = model.Description;
-        content.CourseId = courseId;
         await _contentRepository.UpdateContent(content);
         return _parseService.ParseModel(content);
     }
