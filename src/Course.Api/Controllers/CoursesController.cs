@@ -18,6 +18,7 @@ public class CoursesController : ControllerBase
 
         return Ok();
     }
+
     [HttpGet("{courseId}")]
     public async Task<IActionResult> GetCourseById(Guid courseId)
     {
@@ -29,6 +30,7 @@ public class CoursesController : ControllerBase
     {
         return Ok();
     }
+
     [HttpDelete("{courseId}")]
     public async Task<IActionResult> DeleteCourseById(Guid courseId)
     {

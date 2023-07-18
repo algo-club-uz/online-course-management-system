@@ -47,7 +47,7 @@ public class DataRepository : IDataRepository
         var data = content.Data.FirstOrDefault(d => d.DataId == dataId);
         if (data != null) return data;
 
-        throw new Exception("Data Not Found");
+        throw new System.Exception("Data Not Found");
     }
 
     public async Task UpdateData(Guid courseId, Data data)

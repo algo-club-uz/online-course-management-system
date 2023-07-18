@@ -24,11 +24,13 @@ public class DatasController : ControllerBase
     {
         return Ok();
     }
+
     [HttpDelete("{dataId}")]
     public async Task<IActionResult> DeleteById(Guid courseId, Guid contentId,Guid dataId)
     {
         return Ok();
     } 
+
     [HttpPut("{dataId}")]
     public async Task<IActionResult> UpdateById(Guid courseId, Guid contentId,Guid dataId)
     {
