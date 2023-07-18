@@ -1,4 +1,5 @@
 using Course.Api.Context;
+using Course.Api.Managers;
 using Course.Api.Repositories;
 using Course.Api.Services;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+//Repositories
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();
 builder.Services.AddScoped<IDataRepository, DataRepository>();
+
+//Managers
 builder.Services.AddScoped<ParseService>();
+builder.Services.AddScoped<ContentManager>();
 
 builder.Services.AddDbContext<CourseDbContext>(options =>
 {

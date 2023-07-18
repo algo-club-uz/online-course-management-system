@@ -1,7 +1,4 @@
-﻿using Course.Api.Entities;
-using Course.Api.Models.ContentModels;
-using Course.Api.Models.CourseModels;
-using Course.Api.Models.DataModels;
+﻿using Course.Api.Models.CourseModels;
 using Course.Api.Repositories;
 using Course.Api.Services;
 
