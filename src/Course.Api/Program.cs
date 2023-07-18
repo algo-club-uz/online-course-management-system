@@ -28,7 +28,7 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 
-
+app.UseStaticFiles("Files");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
