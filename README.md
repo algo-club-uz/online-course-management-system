@@ -1,4 +1,5 @@
 # Online Course Management System
+This project includes several microservices and is being writing by my team. My team includes back_end, front_end, mobile developers. It helps to upload contents which belong to IT cources and science. Every person can use this site with free and paid. I mant that some courses will be free and some of them will be paid. I think, it will be great :)
 ### Identity.API
 ```C#
 Identity 
