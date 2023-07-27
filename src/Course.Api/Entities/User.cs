@@ -1,4 +1,4 @@
-﻿using Course.Api.Entities.Enums;
+﻿using CommonFiles.Entities.Enums;
 
 namespace Course.Api.Entities;
 

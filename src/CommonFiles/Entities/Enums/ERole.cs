@@ -1,4 +1,4 @@
-﻿namespace Course.Api.Entities.Enums;
+﻿namespace CommonFiles.Entities.Enums;
 
 public enum ERole
 {

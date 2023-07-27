@@ -1,4 +1,5 @@
-﻿using Course.Api.Entities.Enums;
+﻿using CommonFiles.Entities.Enums;
+using Course.Api.Entities.Enums;
 
 namespace Course.Api.Models.UserModels;
 

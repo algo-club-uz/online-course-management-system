@@ -1,7 +1,6 @@
-﻿using Identity.Api.Entities;
-using Identity.Api.Entities.Enums;
+﻿using CommonFiles.Entities.Enums;
 
-namespace Identity.Api.Models;
+namespace CommonFiles.Models.CommonModels;
 
 public class UserModel
 {

@@ -1,11 +1,10 @@
-﻿using Identity.Api.Context;
+﻿using CommonFiles.Entities.Enums;
+using CommonFiles.Models.CommonModels;
 using Identity.Api.Entities;
-using Identity.Api.Entities.Enums;
 using Identity.Api.Exceptions;
 using Identity.Api.Models;
 using Identity.Api.Repositories;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Api.Managers;
 

@@ -5,6 +5,7 @@ using Course.Api.Services;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Course.Api.Consumers;
 using Course.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,12 +15,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+
 builder.Services.AddSwaggerGen(); builder.Services.AddMassTransit(c =>
 {
     c.AddConsumers(Assembly.GetEntryAssembly());
+    c.AddConsumer<UserConsumer>();
     c.UsingRabbitMq(
         (context, cfg) =>
         {
+            cfg.Host("rabbitmq");
             cfg.ConfigureEndpoints(context);
         }
     );
