@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["src/Course.Api/Course.Api.csproj", "src/Course.Api/"]
+COPY ["src/CommonFiles/CommonFiles.csproj", "src/CommonFiles/"]
 RUN dotnet restore "src/Course.Api/Course.Api.csproj"
 COPY . .
 WORKDIR "/src/src/Course.Api"

@@ -1,10 +1,11 @@
-﻿using Course.Api.Context;
+﻿using CommonFiles.Models.CommonModels;
+using Course.Api.Context;
 using Course.Api.Entities;
 using MassTransit;
 
 namespace Course.Api.Consumers;
 
-public class UserConsumer:IConsumer<User>
+public class UserConsumer:IConsumer<UserModel>
 {
     private readonly CourseDbContext _context;
 
@@ -13,13 +14,18 @@ public class UserConsumer:IConsumer<User>
         _context = context;
     }
 
-    public async Task Consume(ConsumeContext<User> context)
+    public async Task Consume(ConsumeContext<UserModel> context)
     {
-        var user = context.Message;
-
+        var userModel = context.Message;
+        var user = new User()
+        {
+            UserId = userModel.UserId,
+            Firstname = userModel.Firstname,
+            Lastname = userModel.Lastname,
+            Username = userModel.Username,
+            UserRole = userModel.UserRole
+        };
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
-
-
     }
 }

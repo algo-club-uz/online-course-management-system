@@ -911,6 +911,16 @@
         "build": {
           "buildTransitive/net6.0/_._": {}
         }
+      },
+      "CommonFiles/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/CommonFiles.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommonFiles.dll": {}
+        }
       }
     }
   },
@@ -2623,10 +2633,16 @@
         "system.threading.channels.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "CommonFiles/1.0.0": {
+      "type": "project",
+      "path": "../CommonFiles/CommonFiles.csproj",
+      "msbuildProject": "../CommonFiles/CommonFiles.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "CommonFiles >= 1.0.0",
       "MassTransit.AspNetCore >= 7.3.1",
       "MassTransit.RabbitMQ >= 8.0.16",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.9",
@@ -2672,7 +2688,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\.Net projects\\Organization Projects\\Online Course Management System\\src\\CommonFiles\\CommonFiles.csproj": {
+              "projectPath": "D:\\.Net projects\\Organization Projects\\Online Course Management System\\src\\CommonFiles\\CommonFiles.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

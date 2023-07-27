@@ -1,4 +1,4 @@
-﻿using Identity.Api.Entities.Enums;
+﻿using CommonFiles.Entities.Enums;
 
 namespace Identity.Api.Entities;
 
