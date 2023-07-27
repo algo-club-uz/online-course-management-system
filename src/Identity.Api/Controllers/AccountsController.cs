@@ -2,6 +2,7 @@
 using Identity.Api.Managers;
 using Identity.Api.Models;
 using Identity.Api.Providers;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,14 +15,16 @@ public class AccountsController : ControllerBase
     private readonly UserManager _userManager;
     private ILogger<AccountsController> _logger;
     private readonly UserProvider _userProvider;
+    private readonly IBus _bus;
 
     public AccountsController(UserManager userManager, 
         ILogger<AccountsController> logger,
-        UserProvider userProvider)
+        UserProvider userProvider, IBus bus)
     {
         _userManager = userManager;
         _logger = logger;
         _userProvider = userProvider;
+        _bus = bus;
     }
 
     [HttpPost("register")]
@@ -34,6 +37,7 @@ public class AccountsController : ControllerBase
         try
         {
             var user = await _userManager.Register(model);
+            await _bus.Publish(user);
             return Ok(user);
         }
         catch (UsernameExistException e)

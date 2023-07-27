@@ -1,6 +1,7 @@
 using Identity.Api.Context;
 using Identity.Api.Extensions;
 using Identity.Api.Repositories;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -36,7 +37,17 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+builder.Services.AddMassTransit(c =>
+{
+    c.UsingRabbitMq(
+        (context, cfg) =>
+        {
+            cfg.Host("rabbitmq");
+            cfg.ConfigureEndpoints(context);
+        }
+    );
 
+});
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddDbContext<IdentityDbContext>(options =>
@@ -51,7 +62,7 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 
-
+app.MigrateIdentityDb();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

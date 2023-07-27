@@ -2,7 +2,10 @@ using Course.Api.Context;
 using Course.Api.Managers;
 using Course.Api.Repositories;
 using Course.Api.Services;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using Course.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +14,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(); builder.Services.AddMassTransit(c =>
+{
+    c.AddConsumers(Assembly.GetEntryAssembly());
+    c.UsingRabbitMq(
+        (context, cfg) =>
+        {
+            cfg.ConfigureEndpoints(context);
+        }
+    );
+
+});
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 //Repositories
@@ -37,7 +50,9 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 
-app.UseStaticFiles("Files");
+
+app.MigrateCourseDb();
+//app.UseStaticFiles("Files");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
