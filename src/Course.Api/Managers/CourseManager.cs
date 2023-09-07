@@ -6,17 +6,17 @@ namespace Course.Api.Managers;
 
 public class CourseManager
 {
-    private readonly ICourseRepository _courseRepository;
+    private readonly IUnitRepository _unitRepository;
     private readonly ParseService _parseService;
-    public CourseManager(ICourseRepository courseRepository, ParseService parseService)
+    public CourseManager(IUnitRepository unitRepository, ParseService parseService)
     {
-        _courseRepository = courseRepository;
+        _unitRepository = unitRepository;
         _parseService = parseService;
     }
 
     public async Task<List<CourseModel>?> GetCourses()
     {
-        var courses = await _courseRepository.GetCourses();
+        var courses = await _unitRepository.Courses.GetCourses();
         return _parseService.ParseListModel(courses);
     }
 
@@ -29,29 +29,29 @@ public class CourseManager
             Price = model.Price,
             CourseStatus = model.CourseStatus,
         };
-        await _courseRepository.AddCourse(course);
+        await _unitRepository.Courses.AddCourse(course);
         return _parseService.ParseModel(course);
     }
 
     public async Task<CourseModel> GetCourseById(Guid courseId)
     {
-        return _parseService.ParseModel(await _courseRepository.GetCourseById(courseId));
+        return _parseService.ParseModel(await _unitRepository.Courses.GetCourseById(courseId));
     }
 
     public async Task<CourseModel> UpdateCourse(Guid courseId, CreateCourseModel model)
     {
-        var course = await _courseRepository.GetCourseById(courseId);
+        var course = await _unitRepository.Courses.GetCourseById(courseId);
         course.Title = model.Title;
         course.Description = model.Description;
         course.Price = model.Price;
         course.CourseStatus = model.CourseStatus;
-        await _courseRepository.UpdateCourse(course);
+        await _unitRepository.Courses.UpdateCourse(course);
         return _parseService.ParseModel(course);
     }
 
     public async Task<string> DeleteCourse(Guid courseId)
     {
-        await _courseRepository.DeleteCourse(courseId);
+        await _unitRepository.Courses.DeleteCourse(courseId);
         return "Deleted";
     }
 
