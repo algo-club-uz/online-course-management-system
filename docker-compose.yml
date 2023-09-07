@@ -20,6 +20,7 @@ services:
     container_name: identity
     depends_on:
       - rabbitmq
+      - identity_db 
     ports:
       - "2023:80"
     build:
@@ -48,8 +49,8 @@ services:
     image: course
     container_name: course
     depends_on:
-      - course_db
       - rabbitmq
+      - identity_db
     ports:
       - "2024:80"
     build:
@@ -57,6 +58,8 @@ services:
       dockerfile: Dockerfile.Course
     networks:
       - internal_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
 
   course_db:
     image: postgres:latest
@@ -70,6 +73,7 @@ services:
       - course_db_data:/var/lib/postgresql/data/
     networks:
       - internal_network
+      - public_network
 
   rabbitmq:
     image: rabbitmq:3-management

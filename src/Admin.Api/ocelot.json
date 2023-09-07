@@ -11,7 +11,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/account"
-    },{
+    },
+    {
       "DownstreamPathTemplate": "/api/account/{everything}",
       "DownstreamScheme": "http",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
@@ -23,5 +24,6 @@
       ],
       "UpstreamPathTemplate": "/api/account"
     }
-  ]
+  ],
+  "GlobalConfiguration": {}
 }

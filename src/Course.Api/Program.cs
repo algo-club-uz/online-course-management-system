@@ -37,6 +37,7 @@ builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();
 builder.Services.AddScoped<IDataRepository, DataRepository>();
 builder.Services.AddScoped<IUserCourseRepository, UserCourseRepository>();
+builder.Services.AddScoped<IUnitRepository, UnitRepository>();
 
 //Managers
 builder.Services.AddScoped<ParseService>();
