@@ -1,42 +1,63 @@
-﻿services:
+﻿version: '3.8'
+
+services:
+  admin:
+    image: admin
+    container_name: admin
+    build:
+      context: .
+      dockerfile: Dockerfile.Admin
+    ports:
+      - "3023:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - public_network
+      - internal_network
+
   identity:
     image: identity
     container_name: identity
     depends_on:
-         - identity_db1 
-         - rabbitmq 
+      - rabbitmq
     ports:
-        - '2023:80'    
+      - "2023:80"
     build:
-        context: .
-        dockerfile: Dockerfile.Identity
+      context: .
+      dockerfile: Dockerfile.Identity
     networks:
-      - internal
-  identity_db1:
+      - internal_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  identity_db:
     image: postgres:latest
-    container_name: identity_db1
+    container_name: identity_db
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
     restart: always
     volumes:
-      - identity_db1_data:/var/lib/postgresql/data/
+      - identity_db_data:/var/lib/postgresql/data/
     networks:
-      - internal
+      - public_network
+      - internal_network
+
   course:
     image: course
     container_name: course
-    depends_on: 
-        - course_db
-        - rabbitmq
+    depends_on:
+      - course_db
+      - rabbitmq
     ports:
-        - '2024:80'
+      - "2024:80"
     build:
-        context: .
-        dockerfile: Dockerfile.Course
+      context: .
+      dockerfile: Dockerfile.Course
     networks:
-      - internal
+      - internal_network
+
   course_db:
     image: postgres:latest
     container_name: course_db
@@ -48,10 +69,11 @@
     volumes:
       - course_db_data:/var/lib/postgresql/data/
     networks:
-      - internal
+      - internal_network
+
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: 'rabbitmq'
+    container_name: rabbitmq
     ports:
       - 5672:5672
       - 15672:15672
@@ -59,9 +81,14 @@
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
-      - internal
-networks:
-  internal:
-volumes: 
-  identity_db1_data:
+      - public_network
+      - internal_network
+
+volumes:
+  identity_db_data:
   course_db_data:
+
+networks:
+  internal_network:
+    internal: true
+  public_network:
