@@ -42,12 +42,26 @@ public static  class ServiceCollectionExtensions
         services.AddScoped<UserProvider>();
     }
 
-    public static void MigrateIdentityDb(this WebApplication app)
+    /*public static void MigrateIdentityDb(this WebApplication app)
     {
         if (app.Services.GetService<IdentityDbContext>() != null)
         {
             var identityDb = app.Services.GetRequiredService<IdentityDbContext>();
             identityDb.Database.Migrate();
+        }
+    }*/
+
+    public static void MigrateIdentityDb(this IApplicationBuilder app)
+    {
+        using (var scope = app.ApplicationServices.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            var identityDb = services.GetService<IdentityDbContext>();
+
+            if (identityDb != null)
+            {
+                identityDb.Database.Migrate();
+            }
         }
     }
 }
