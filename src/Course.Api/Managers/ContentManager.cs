@@ -7,18 +7,18 @@ namespace Course.Api.Managers;
 
 public class ContentManager
 {
-    private readonly IContentRepository _contentRepository;
+    private readonly IUnitRepository _unitRepository;
     private readonly ParseService _parseService;
 
-    public ContentManager(IContentRepository contentRepository, ParseService parseService)
+    public ContentManager(IUnitRepository unitRepository, ParseService parseService)
     {
-        _contentRepository = contentRepository;
+        _unitRepository = unitRepository;
         _parseService = parseService;
     }
 
     public async Task<List<ContentModel>?> GetContents(Guid courseId)
     {
-        var contents = await _contentRepository.GetContents(courseId);
+        var contents = await _unitRepository.Contents.GetContents(courseId);
         return _parseService.ParseListModel(contents);
     }
 
@@ -32,28 +32,28 @@ public class ContentManager
 
         };
 
-        await _contentRepository.AddContent(content);
+        await _unitRepository.Contents.AddContent(content);
         return _parseService.ParseModel(content);
     }
 
     public async Task<ContentModel> GetContentById(Guid courseId, Guid contentId)
     {
-        var content = await _contentRepository.GetContentById(courseId, contentId);
+        var content = await _unitRepository.Contents.GetContentById(courseId, contentId);
         return _parseService.ParseModel(content);
     }
 
     public async Task<ContentModel> UpdateContent(Guid courseId, Guid contentId,CreateContentModel model)
     {
-        var content = await _contentRepository.GetContentById(courseId, contentId);
+        var content = await _unitRepository.Contents.GetContentById(courseId, contentId);
         content.ContentName = model.ContentName;
         content.Description = model.Description;
-        await _contentRepository.UpdateContent(content);
+        await _unitRepository.Contents.UpdateContent(content);
         return _parseService.ParseModel(content);
     }
 
     public async Task<string> DeleteContent(Guid courseId, Guid contentId)
     {
-        await _contentRepository.DeleteContent(courseId, contentId);
+        await _unitRepository.Contents.DeleteContent(courseId, contentId);
         return "Deleted";
     }
 
