@@ -7,18 +7,18 @@ namespace Course.Api.Managers;
 
 public class DataManager
 {
-    private readonly IDataRepository _repository;
+    private readonly IUnitRepository _unitRepository;
     private readonly ParseService _parseService;
 
-    public DataManager(IDataRepository repository, ParseService parseService)
+    public DataManager(IUnitRepository unitRepository, ParseService parseService)
     {
-        _repository = repository;
+        _unitRepository = unitRepository;
         _parseService = parseService;
     }
 
     public async Task<List<DataModel>?> GetDatas(Guid courseId, Guid contentId)
     {
-        var datas = await _repository.GetDatas(courseId, contentId);
+        var datas = await _unitRepository.Data.GetDatas(courseId, contentId);
         return _parseService.ParseListModel(datas);
     }
 
@@ -31,32 +31,32 @@ public class DataManager
             FileUrl = await FileService.SaveFile(model.DataFile),
             ContentId = contentId
         };
-        await _repository.AddData(courseId,data);
+        await _unitRepository.Data.AddData(courseId,data);
         return _parseService.ParseModel(data);
     }
 
     public async Task<DataModel> GetDataById(Guid courseId, Guid contentId, Guid dataId)
     {
-        var data = await _repository.GetDataById(courseId,contentId,dataId);
+        var data = await _unitRepository.Data.GetDataById(courseId,contentId,dataId);
         return _parseService.ParseModel(data);
     }
 
     public async Task<DataModel> UpdateData(Guid courseId, Guid contentId, Guid dataId,CreateDataModel model)
     {
-        var data = await _repository.GetDataById(courseId, contentId, dataId);
+        var data = await _unitRepository.Data.GetDataById(courseId, contentId, dataId);
 
         data.DataName = model.DataName;
         data.Description = model.Description;
         data.FileUrl = await FileService.SaveFile(model.DataFile);
 
-        await _repository.UpdateData(courseId, data);
+        await _unitRepository.Data.UpdateData(courseId, data);
 
         return _parseService.ParseModel(data);
     }
 
     public async Task<string> DeleteData(Guid courseId, Guid contentId, Guid dataId)
     {
-        await _repository.DeleteData(courseId, contentId, dataId);
+        await _unitRepository.Data.DeleteData(courseId, contentId, dataId);
         return "Deleted";
     }
 
