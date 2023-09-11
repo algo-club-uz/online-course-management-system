@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: Dockerfile.Admin
     ports:
-      - "3023:80"
+      - "3024:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
@@ -20,7 +20,6 @@ services:
     container_name: identity
     depends_on:
       - rabbitmq
-      - identity_db 
     ports:
       - "2023:80"
     build:
@@ -50,7 +49,6 @@ services:
     container_name: course
     depends_on:
       - rabbitmq
-      - identity_db
     ports:
       - "2024:80"
     build:
